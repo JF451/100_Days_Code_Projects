@@ -15,4 +15,33 @@ class Board:
         print()
 
     def check_win_condition(self, token):
+        my_dict = {}
+
+        # now return a draw
+        # Horizontal winning condition
+        for i in range(len(self.board)):
+            count = 0
+            for j in range(len(self.board[i])):
+                if self.board[i][j] == token:
+                    count += 1
+            if count == 3:
+                return True
+
+        for i in range(len(self.board)):
+            count = 0
+            for j in range(len(self.board[i])):
+                if self.board[j][i] == token:
+                    count += 1
+            if count == 3:
+                return True
+
+
+        #check diagonals
+        if self.board[0][0] == token and self.board[1][1] == token and self.board[2][2]:
+            return True
+        if self.board[0][2] == token and self.board[1][1] == token and self.board[2][0]:
+            return True
+
+
+
         return False
