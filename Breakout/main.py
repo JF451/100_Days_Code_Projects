@@ -2,6 +2,7 @@ from turtle import Turtle,Screen
 from paddle import Paddle
 from ball import Ball
 import time
+from block import Block
 
 #Screen setup
 screen = Screen()
@@ -13,6 +14,16 @@ screen.tracer(0)
 
 paddle = Paddle((40,-300))
 ball = Ball()
+
+blocks = []
+for i in range(15):
+    blocks.append(Block("red"))
+
+for index, block in enumerate(blocks):
+    block.goto(-index * 30, 20)
+
+for index, block in enumerate(blocks):
+    block.goto(index * 30, 20)
 
 
 screen.listen()
@@ -29,6 +40,11 @@ while game_is_on:
     # detect collision
     if ball.ycor() > 300:
         ball.bounce_y()
+
+    for block in blocks:
+        if ball.distance(block) < 20:
+            ball.bounce_y()
+            block.reset()
 
     if ball.distance(paddle) < 20:
         print("SUCCCESS")
